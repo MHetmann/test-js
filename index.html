@@ -20,13 +20,15 @@
 
     
     <div id="pfc">
+      <div id="score"></div>
+      <div id="score_ia"></div>
       <h2>Jouer contre l'IA à pierre feuille ciseaux ?</h2><br>
       <button onclick=start_pfc()>start</button>
-      <img src="img/ciseaux_ia.png" onclick='check(1);'>
-      <img src="img/feuille_ia.png" onclick='check(2);'>
-      <img src="img/pierre_ia.png" onclick='check(3);'>
+      <img id="img1" src="img/ciseaux_ia.png" onclick='check(1);'>
+      <img id="img2" src="img/feuille_ia.png" onclick='check(2);'>
+      <img id="img3" src="img/pierre_ia.png" onclick='check(3);'>
       <h1 id="resultat"></h1>
-
+      <button id="replay" onclick=start_game()>Rejouer ?</button>
     </div>
 
     <script>
@@ -92,19 +94,25 @@
         
         // ====================================================================================
         var pfc = document.getElementById('pfc');
+        var vic_joueur=0;
+        var vic_ia=0;
         function start_pfc(){
           pfc.getElementsByTagName('h2')[0].style.display = 'none';
           pfc.getElementsByTagName('button')[0].style.display = 'none';
           start_game();
         }
         function start_game(){
-          var vic_joueur=0;
-          var vic_ia=0;
+          document.getElementById('replay').style.display = 'none';
+          vic_joueur=0;
+          vic_ia=0;
+          document.getElementById('score').innerHTML = "Joueur : "+vic_joueur;
+          document.getElementById('score_ia').innerHTML = "IA : "+vic_ia;
           pfc.getElementsByTagName('img')[0].style.display = 'block';
           pfc.getElementsByTagName('img')[1].style.display = 'block';
           pfc.getElementsByTagName('img')[2].style.display = 'block';
-        alert("1");
-        function check(choix){
+        
+      }
+      function check(choix){
           ia_choix = Math.floor(Math.random()*3)+1;
           console.log("choix : "+choix);
           console.log("ia_choix : "+ia_choix);
@@ -116,35 +124,65 @@
             case 1:
               var resultat = (ia_choix==2)?'victoire':'defaite';
               break;
-
               // ===============================================
-
             case 2:
               var resultat = (ia_choix==1)?'victoire':'defaite';
               break;
-
               // ===============================================
-
             case 3:
               var resultat = (ia_choix==3)?'victoire':'defaite';
               break;
-
               // ===============================================
-          
             default:console.log("ERREUR");
               break;
           }
           
         }
-        pfc.getElementsByTagName('img')[0].style.display = 'none';
-        pfc.getElementsByTagName('img')[1].style.display = 'none';
-        pfc.getElementsByTagName('img')[2].style.display = 'none';
+        document.getElementById('img1').style.display = 'none';
+        document.getElementById('img2').style.display = 'none';
+        document.getElementById('img3').style.display = 'none';
+        switch (resultat) {
+            case 'egalite':
+              document.getElementById('resultat').innerHTML = "EGALITE";
+              break;
+            case 'victoire':
+              document.getElementById('resultat').innerHTML = "MANCHE GAGNEE";
+              vic_joueur++;
+              break;
+            case 'defaite':
+              document.getElementById('resultat').innerHTML = "MANCHE PERDUE";
+              vic_ia++;
+              break;
+            default:console.log("ERREUR");
+              break;
+          }
+          document.getElementById('score').innerHTML = "Joueur : "+vic_joueur;
+          document.getElementById('score_ia').innerHTML = "IA : "+vic_ia;
 
-        document.getElementById('resultat').innerHTML = "VICTOIRE";
-        console.log(resultat);
+
+          setTimeout(
+          function() 
+          {
+            document.getElementById('resultat').innerHTML = "";
+          
+          if(vic_joueur==3 || vic_ia ==3){
+            var msg;
+            (vic_joueur==3)?msg='WINNER':msg='LOSER';
+            document.getElementById('resultat').innerHTML = msg;
+            setTimeout(
+              function()
+              {
+                document.getElementById('resultat').innerHTML = "";
+                document.getElementById('replay').style.display = 'block';
+              },2500)
+          }else{
+          pfc.getElementsByTagName('img')[0].style.display = 'block';
+          pfc.getElementsByTagName('img')[1].style.display = 'block';
+          pfc.getElementsByTagName('img')[2].style.display = 'block';
+          }
+        }, 1000);
+        
         }
-        alert("1");
-      }
 
         // ====================================================================================
         var pokemons = [];
