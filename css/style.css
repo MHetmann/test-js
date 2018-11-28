@@ -1,0 +1,108 @@
+*,*::before,*::after{box-sizing: border-box;}
+
+body{
+    margin:0;
+    padding:0;
+}
+
+#Mymsg{
+    background: steelblue;
+    color:white;
+}
+
+#Mymsg2{
+    background: firebrick;
+    color:white;
+}
+
+table{
+    display:flex;
+    flex-direction: column;
+    background:rgb(73, 73, 73);
+    font-size:1.2em;
+}
+
+tr{
+    display:flex;
+}
+tr:first-child{
+    font-weight: bold;
+}
+
+td{
+    text-align: center;
+    padding: .5em;
+    margin:5px;
+    border-radius: 5px;
+    border:2px black solid;
+}
+
+tr:nth-child(odd) td{
+    background:darkgrey;
+}
+
+tr:nth-child(even) td{
+    background:lightgrey;
+}
+
+td:nth-child(1){
+    flex-basis: 45%;
+}
+
+td:nth-child(2){
+    flex-basis: 45%;
+}
+td:nth-child(3){
+    flex-basis: 10%;
+}
+
+
+
+#pfc{
+    position: relative;
+    margin:100px auto;
+    padding:4em 1em;
+    width:50%;
+    height:300px;
+    background:rgb(255, 230, 0);
+}
+
+#pfc img{
+    position:absolute;
+    display:none;
+    top:30%;
+}
+
+#pfc img:nth-of-type(1){
+    left:100px;
+}
+
+#pfc img:nth-of-type(2){
+    left:250px;
+}
+
+#pfc img:nth-of-type(3){
+    left:400px;
+}
+
+
+
+#pfc h2{
+    text-align: center;
+}
+
+#pfc button{
+    position:absolute;
+    padding:2em 3em;
+    border-radius: 10px;
+    border: 0;
+    width:20%;
+    align-self: center;
+    font-weight: bold;
+    z-index:1;
+    left:40%;
+}
+
+#pfc #resultat{
+    color:blue;
+}

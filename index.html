@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+    <p id="Mymsg"></p><br>
+    <p id="Mymsg2"></p><br><br>
+    <p id="Test">hgg</p>
+
+    <p id="chrono"></p>
+    <button id="start" onclick=start_timer()>Chrono</button>
+    <button id="start" onclick=stop_timer()>Stop</button>
+
+    
+    <div id="pfc">
+      <h2>Jouer contre l'IA à pierre feuille ciseaux ?</h2><br>
+      <button onclick=start_pfc()>start</button>
+      <img src="img/ciseaux_ia.png" onclick='check(1);'>
+      <img src="img/feuille_ia.png" onclick='check(2);'>
+      <img src="img/pierre_ia.png" onclick='check(3);'>
+      <h1 id="resultat"></h1>
+
+    </div>
+
+    <script>
+
+        var note=7;
+      
+        if(note<5){
+          msg="Mediocre";
+        }
+        else if(note <10){
+          msg="Passable";
+        }
+        else if(note <15){
+          msg="Bon";
+        }
+        else{
+          msg="Très bon";
+        }
+      
+        document.getElementById("Mymsg").innerHTML ="note :"+note+"<br><br>"+ msg;
+
+      // ====================================================================================
+      
+        var note2=7;
+      
+       function func2(x){
+        if(x<5){
+          msg2="Mediocre";
+        }
+        else if(x <10){
+          msg2="Passable";
+        }
+        else if(x <15){
+          msg2="Bon";
+        }
+        else{
+          msg2="Très bon";
+        }
+        return msg2;
+        }
+      
+        document.getElementById("Mymsg2").innerHTML ="note 2 :"+note2+"<br><br>"+ func2(note2);
+        
+        // ====================================================================================
+        
+        
+
+        function start_timer(){
+          document.getElementById("Test").innerHTML ="Temps ecoule : 0";
+          document.getElementById("start").style.display = "none";
+        var start = Date.now();
+
+        }
+        
+        setInterval(myTimer, 250);
+        function myTimer() {
+          var ladate=new Date();
+        document.getElementById("chrono").innerHTML ="<br><br>Heure brute : ";
+        document.getElementById("chrono").innerHTML =ladate.getHours()+":"+ladate.getMinutes()+":"+ladate.getSeconds();
+
+        }
+        
+        
+        // ====================================================================================
+        var pfc = document.getElementById('pfc');
+        function start_pfc(){
+          pfc.getElementsByTagName('h2')[0].style.display = 'none';
+          pfc.getElementsByTagName('button')[0].style.display = 'none';
+          start_game();
+        }
+        function start_game(){
+          var vic_joueur=0;
+          var vic_ia=0;
+          pfc.getElementsByTagName('img')[0].style.display = 'block';
+          pfc.getElementsByTagName('img')[1].style.display = 'block';
+          pfc.getElementsByTagName('img')[2].style.display = 'block';
+        alert("1");
+        function check(choix){
+          ia_choix = Math.floor(Math.random()*3)+1;
+          console.log("choix : "+choix);
+          console.log("ia_choix : "+ia_choix);
+          if(ia_choix == choix){
+            var resultat = 'egalite';
+          }
+          else{
+          switch (choix) {
+            case 1:
+              var resultat = (ia_choix==2)?'victoire':'defaite';
+              break;
+
+              // ===============================================
+
+            case 2:
+              var resultat = (ia_choix==1)?'victoire':'defaite';
+              break;
+
+              // ===============================================
+
+            case 3:
+              var resultat = (ia_choix==3)?'victoire':'defaite';
+              break;
+
+              // ===============================================
+          
+            default:console.log("ERREUR");
+              break;
+          }
+          
+        }
+        pfc.getElementsByTagName('img')[0].style.display = 'none';
+        pfc.getElementsByTagName('img')[1].style.display = 'none';
+        pfc.getElementsByTagName('img')[2].style.display = 'none';
+
+        document.getElementById('resultat').innerHTML = "VICTOIRE";
+        console.log(resultat);
+        }
+        alert("1");
+      }
+
+        // ====================================================================================
+        var pokemons = [];
+        pokemons[1] = {name:'Bulbizarre', id:'001', type:['plante','poison']}
+        pokemons[2] = {name:'Herbizarre', id:'002', type:['plante','poison']}
+        pokemons[3] = {name:'Florizarre', id:'003', type:['plante','poison']}
+        pokemons[4] = {name:'Salameche', id:'004', type:['feu']}
+        pokemons[5] = {name:'Reptincel', id:'005', type:['feu']}
+        pokemons[6] = {name:'Dracaufeu', id:'006', type:['feu','vol']}
+        pokemons[7] = {name:'Carapuce', id:'007', type:['eau']}
+        pokemons[8] = {name:'Carabaffe', id:'008', type:['eau']}
+        pokemons[9] = {name:'Tortank', id:'009', type:['eau']}
+        pokemons[10] = {name:'Chenipan', id:'010', type:['insecte']}
+        pokemons[11] = {name:'Chysacier', id:'011', type:['insecte']}
+        pokemons[12] = {name:'Papilusion', id:'012', type:['insecte','vol']}
+        pokemons[13] = {name:'Aspicot', id:'013', type:['insecte','poison']}
+        pokemons[14] = {name:'Coconfort', id:'014', type:['insecte','poison']}
+        pokemons[15] = {name:'Dardargnan', id:'015', type:['insecte','poison']}
+        pokemons[16] = {name:'Roucool', id:'016', type:['normal','vol']}
+        pokemons[17] = {name:'Roucoups', id:'017', type:['normal','vol']}
+        pokemons[18] = {name:'Roucarnage', id:'018', type:['normal','vol']}
+
+        var tablestart="<table>";
+        var tableend = "</table>";
+        var trstart = "<tr>";
+        var trend = "</tr>";
+        var tdstart = "<td>";
+        var tdend = "</td>";
+
+
+
+        document.write(tablestart); 
+        document.write(tdstart+"Nom"+tdend+tdstart+"Type"+tdend+tdstart+"ID"+tdend);
+        for (let i = 1; i < pokemons.length; i++) {
+          document.write(trstart+tdstart+pokemons[i].name+tdend+tdstart+pokemons[i].type+tdend+tdstart+"#"+pokemons[i].id+tdend+trend);
+          
+        }
+        
+</script>      
+</body>
+
+</html>
